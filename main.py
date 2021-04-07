@@ -1,16 +1,26 @@
-# This is a sample Python script.
+import os
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    # desk = os.path.join(os.path.expanduser("~"), 'Desktop') + '\\' #mac桌面路径
+    # root 当前正在访问的文件夹路径
+    # dirs 该文件夹下面的子目录名 list
+    # files 表示改文件夹下的文件 list
+    for root,dirs,files in os.walk("/"):
+        #遍历文件
+        for f in files:
+            path = os.path.join(root,f)
+            if os.path.exists(path):
+                if not os.path.getsize(path):
+                    try:
+                        os.remove(path)
+                    except PermissionError:
+                        print("PermissionError：%s" % path)
+        #遍历文件夹
+        for d in dirs:
+            path = os.path.join(root,d)
+            if os.path.exists(path):
+                if not os.path.getsize(path):
+                    try:
+                        os.remove(path)
+                    except PermissionError:
+                        print("PermissionError：%s" % path)
